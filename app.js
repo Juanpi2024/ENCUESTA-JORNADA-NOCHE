@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getDatabase, ref, push, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 // --- Firebase Configuration ---
 const firebaseConfig = {
@@ -160,6 +160,20 @@ function setupEventListeners() {
   document.getElementById("btn-toggle-view").addEventListener("click", () => {
     const isSurveyActive = document.getElementById("survey-section").style.display !== "none";
     toggleView(isSurveyActive ? "dashboard" : "survey");
+  });
+
+  // Clear Database
+  document.getElementById("btn-clear-data").addEventListener("click", () => {
+    if (confirm("⚠️ ¿Estás seguro de que deseas eliminar permanentemente TODAS las respuestas de la base de datos? Esta acción es irreversible.")) {
+      set(responsesRef, null)
+        .then(() => {
+          alert("✅ Base de datos limpiada con éxito.");
+        })
+        .catch((error) => {
+          console.error("Error al limpiar base de datos:", error);
+          alert("❌ Error al limpiar la base de datos. Verifica la conexión.");
+        });
+    }
   });
 
   // Simulation of responses
