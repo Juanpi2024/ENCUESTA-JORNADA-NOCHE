@@ -925,3 +925,135 @@ body {
   color: var(--text-muted);
   font-size: 0.85rem;
 }
+
+/* --- PRINT STYLES --- */
+.print-only {
+  display: none;
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-family: 'Inter', Arial, sans-serif !important;
+  }
+  
+  /* Hide all digital screen elements */
+  .bg-stars, .bg-aurora, .app-container, .app-header, .main-content, .app-footer-bar {
+    display: none !important;
+  }
+
+  /* Show and format print layout */
+  .print-only {
+    display: block !important;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: black !important;
+  }
+
+  .print-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .print-header h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    color: black !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .print-header p {
+    font-size: 14px;
+    color: #333 !important;
+    margin: 0;
+  }
+
+  .print-divider {
+    height: 2px;
+    background: #000;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  .print-intro {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    text-align: justify;
+    color: #444 !important;
+  }
+
+  .print-block {
+    margin-bottom: 28px;
+    page-break-inside: avoid;
+  }
+
+  .print-block h3 {
+    font-size: 15px;
+    font-weight: 700;
+    border-bottom: 1px solid #333;
+    padding-bottom: 4px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+
+  .print-question {
+    margin-bottom: 18px;
+    page-break-inside: avoid;
+  }
+
+  .print-q-label {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .print-options {
+    margin-left: 15px;
+  }
+
+  .print-options p {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+
+  .print-write-line {
+    border-bottom: 1px solid #ccc;
+    height: 24px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+
+  .print-scale {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+    margin-left: 15px;
+    font-size: 11px;
+  }
+
+  .scale-box {
+    border: 1px solid #000;
+    padding: 4px 8px;
+    font-weight: bold;
+  }
+
+  .print-identity-block {
+    border: 1px solid #000;
+    padding: 16px;
+    margin-top: 40px;
+    page-break-inside: avoid;
+  }
+
+  .print-identity-block h3 {
+    border: none;
+    margin-bottom: 10px;
+  }
+}

@@ -112,6 +112,10 @@ function setupEventListeners() {
     goToStep(1);
   });
 
+  document.getElementById("btn-print-survey").addEventListener("click", () => {
+    window.print();
+  });
+
   document.getElementById("btn-next-step").addEventListener("click", () => {
     if (validateCurrentStep()) {
       goToStep(currentStepIndex + 1);

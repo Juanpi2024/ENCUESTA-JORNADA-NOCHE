@@ -49,10 +49,15 @@
               <span class="icon">🛡️</span>
               <p><strong>100% Confidencial y Transparente:</strong> Puedes responder de forma totalmente anónima. La honestidad es nuestro insumo más valioso.</p>
             </div>
-            <button id="btn-start-survey" class="btn btn-primary btn-large">
-              <span>Comenzar Encuesta</span>
-              <span class="arrow">→</span>
-            </button>
+            <div class="welcome-buttons" style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 32px;">
+              <button id="btn-start-survey" class="btn btn-primary btn-large">
+                <span>Comenzar Encuesta Digital</span>
+                <span class="arrow">→</span>
+              </button>
+              <button id="btn-print-survey" class="btn btn-secondary btn-large">
+                <span>🖨️ Imprimir en Papel (Físico)</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -489,6 +494,135 @@
     <footer class="app-footer-bar">
       <p>© 2026 La Voz de la Noche • Diseñado con empatía y tecnología de vanguardia</p>
     </footer>
+  </div>
+
+  <!-- PRINT-ONLY SURVEY (Hidden in screen mode, fully styled in print mode) -->
+  <div id="printable-survey" class="print-only">
+    <div class="print-header">
+      <h2>La Voz de la Noche</h2>
+      <p>Encuesta Estratégica de la Jornada Nocturna</p>
+      <div class="print-divider"></div>
+    </div>
+    
+    <p class="print-intro">
+      Tu voz es el insumo más importante para diseñar nuestra estrategia. Ayúdanos a entender dónde estamos, cuáles son nuestras fortalezas y qué necesidades debemos atender. Por favor, responde con total honestidad.
+    </p>
+
+    <!-- BLOQUE 1 -->
+    <div class="print-block">
+      <h3>🌟 Bloque 1: Fortalezas y Sentido de Pertenencia</h3>
+      
+      <div class="print-question">
+        <p class="print-q-label">1. ¿Qué consideras que nos destaca como equipo de la jornada nocturna?</p>
+        <div class="print-options">
+          <p>[  ] El compañerismo y la unión del equipo</p>
+          <p>[  ] El impacto directo en los estudiantes/usuarios</p>
+          <p>[  ] La flexibilidad horaria y conciliación</p>
+          <p>[  ] La autonomía y tranquilidad del horario nocturno</p>
+          <p>[  ] Otro: __________________________________________________________________</p>
+        </div>
+      </div>
+
+      <div class="print-question">
+        <p class="print-q-label">2. Desde tu experiencia en el día a día, ¿cuál consideras que es la mayor fortaleza o &quot;súperpoder&quot; que tiene nuestro equipo frente a cualquier adversidad?</p>
+        <div class="print-write-line"></div>
+        <div class="print-write-line"></div>
+      </div>
+    </div>
+
+    <!-- BLOQUE 2 -->
+    <div class="print-block">
+      <h3>🌱 Bloque 2: Necesidades y Debilidades</h3>
+      
+      <div class="print-question">
+        <p class="print-q-label">3. ¿Cuál consideras que es el mayor obstáculo, recurso faltante o frustración que dificulta tu labor o la hace más lenta durante la noche?</p>
+        <div class="print-write-line"></div>
+        <div class="print-write-line"></div>
+      </div>
+
+      <div class="print-question">
+        <p class="print-q-label">3.5. Describe cuáles consideras que son las principales carencias o necesidades (materiales, tecnológicas o de personal) en nuestro equipo nocturno:</p>
+        <div class="print-write-line"></div>
+        <div class="print-write-line"></div>
+      </div>
+
+      <div class="print-question">
+        <p class="print-q-label">4. ¿Sientes que cuentas con las herramientas (materiales, tecnológicas, de información y apoyo) necesarias para brindar un servicio de excelencia?</p>
+        <div class="print-scale">
+          <span>(Nada de herramientas)</span>
+          <span class="scale-box">[ ] 1</span>
+          <span class="scale-box">[ ] 2</span>
+          <span class="scale-box">[ ] 3</span>
+          <span class="scale-box">[ ] 4</span>
+          <span class="scale-box">[ ] 5</span>
+          <span>(Absolutamente todo)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOQUE 3 -->
+    <div class="print-block">
+      <h3>🚀 Bloque 3: Oportunidades y Expectativas</h3>
+      
+      <div class="print-question">
+        <p class="print-q-label">5. Si pudieras implementar una nueva herramienta, proceso o práctica mañana mismo para mejorar nuestro trabajo, ¿cuál sería y qué problema resolvería?</p>
+        <div class="print-write-line"></div>
+        <div class="print-write-line"></div>
+      </div>
+
+      <div class="print-question">
+        <p class="print-q-label">6. ¿Qué capacidades, competencias o habilidades grupales crees que deberíamos fortalecer o desarrollar colectivamente en el equipo de la noche?</p>
+        <div class="print-write-line"></div>
+        <div class="print-write-line"></div>
+      </div>
+
+      <div class="print-question">
+        <p class="print-q-label">7. ¿Cuáles son tus principales expectativas para la jornada nocturna de aquí a fin de año? ¿Cómo visualizas nuestro entorno ideal de trabajo?</p>
+        <div class="print-write-line"></div>
+      </div>
+    </div>
+
+    <!-- BLOQUE 4 -->
+    <div class="print-block">
+      <h3>🛡️ Bloque 4: Inquietudes, Amenazas e Influencia</h3>
+      
+      <div class="print-question">
+        <p class="print-q-label">8. ¿Qué aspectos del entorno actual te generan mayor inquietud o crees que podrían amenazar nuestro desempeño a corto/mediano plazo? (Selecciona todas las que apliquen)</p>
+        <div class="print-options">
+          <p>[  ] Falta de comunicación institucional</p>
+          <p>[  ] Temas de seguridad física/entorno</p>
+          <p>[  ] Excesiva carga laboral / Agotamiento</p>
+          <p>[  ] Falta de capacitación adaptada</p>
+          <p>[  ] Otro: __________________________________________________________________</p>
+        </div>
+      </div>
+
+      <div class="print-question">
+        <p class="print-q-label">9. ¿Sientes que tus ideas, alertas y sugerencias son escuchadas y tienen un impacto real en las decisiones que se toman para la jornada?</p>
+        <div class="print-scale">
+          <span>(Nunca me escuchan)</span>
+          <span class="scale-box">[ ] 1</span>
+          <span class="scale-box">[ ] 2</span>
+          <span class="scale-box">[ ] 3</span>
+          <span class="scale-box">[ ] 4</span>
+          <span class="scale-box">[ ] 5</span>
+          <span>(Mis ideas siempre generan impacto)</span>
+        </div>
+      </div>
+
+      <div class="print-question">
+        <p class="print-q-label">10. Este es tu espacio libre: ¿Hay alguna mejora urgente, comentario o idea que no hayamos tocado en las preguntas anteriores y que el equipo directivo deba conocer?</p>
+        <div class="print-write-line"></div>
+        <div class="print-write-line"></div>
+      </div>
+    </div>
+
+    <!-- REGISTRO -->
+    <div class="print-block print-identity-block">
+      <h3>📋 Registro de Identificación</h3>
+      <p style="margin-top: 10px;">Nombre Completo: ________________________________________________________________________________</p>
+      <p style="margin-top: 15px;">Categoría: &nbsp;&nbsp;&nbsp; [  ] Docentes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [  ] Asistentes de la educación</p>
+    </div>
   </div>
 
   <script src="app.js"></script>
