@@ -81,7 +81,7 @@
             <!-- Pregunta 1 -->
             <div class="question-card" id="q-card-1">
               <label class="question-label">
-                1. ¿Qué es lo que más te motiva y te hace sentir orgulloso de pertenecer al equipo de la jornada nocturna?
+                1. ¿Qué consideras que nos destaca como equipo de la jornada nocturna?
                 <span class="required">*</span>
               </label>
               <div class="options-grid">
@@ -154,6 +154,15 @@
               <div class="char-count"><span id="q3-count">0</span> caracteres</div>
             </div>
 
+            <!-- Pregunta 3.5: Carencias y Necesidades -->
+            <div class="question-card" id="q-card-3b">
+              <label class="question-label" for="q3b_needs">
+                3.5. Describe cuáles consideras que son las principales carencias o necesidades (materiales, tecnológicas o de personal) en nuestro equipo nocturno:
+                <span class="required">*</span>
+              </label>
+              <textarea id="q3b_needs" name="q3b_needs" class="input-textarea" placeholder="Especifica detalladamente qué recursos faltan o qué necesidades urgentes deben atenderse..." required></textarea>
+            </div>
+
             <!-- Pregunta 4 -->
             <div class="question-card" id="q-card-4">
               <label class="question-label">
@@ -208,11 +217,11 @@
 
             <!-- Pregunta 6 -->
             <div class="question-card" id="q-card-6">
-              <label class="question-label" for="q6_hidden_talents">
-                6. ¿Qué habilidad, conocimiento o talento personal tienes que crees que podría aportar un gran valor al equipo, pero que actualmente no se está aprovechando al máximo?
+              <label class="question-label" for="q6_team_strengths">
+                6. ¿Qué capacidades, competencias o habilidades grupales crees que deberíamos fortalecer o desarrollar colectivamente en el equipo de la noche?
                 <span class="required">*</span>
               </label>
-              <textarea id="q6_hidden_talents" name="q6_hidden_talents" class="input-textarea" placeholder="Ej: Liderazgo, análisis de datos, mentoría, diseño, idiomas..." required></textarea>
+              <textarea id="q6_team_strengths" name="q6_team_strengths" class="input-textarea" placeholder="Ej: Mayor coordinación entre departamentos, capacitación técnica conjunta, protocolos de comunicación claros..." required></textarea>
             </div>
 
             <!-- Pregunta 7 -->
@@ -324,16 +333,29 @@
               <textarea id="q10_final_pulse" name="q10_final_pulse" class="input-textarea" placeholder="Escribe aquí con total libertad..." required></textarea>
             </div>
 
-            <!-- Opcional: Identificación -->
-            <div class="question-card optional-card">
-              <label class="question-label" for="user_email">
-                📧 Identificación Opcional
+            <!-- Identificación Obligatoria y Categoría -->
+            <div class="question-card">
+              <label class="question-label">
+                📋 Registro de Identificación
+                <span class="required">*</span>
               </label>
               <p class="question-help">
-                Si prefieres que tu aporte sea anónimo para mayor transparencia, deja este campo vacío. 
-                Si deseas que nos comuniquemos contigo para dar seguimiento individual a tus propuestas, escribe tu correo electrónico o nombre.
+                Por favor, ingresa tus datos para registrar formalmente tu participación en la encuesta estratégica de la jornada.
               </p>
-              <input type="text" id="user_identity" class="input-text" placeholder="Nombre o correo electrónico (opcional)">
+              <div class="options-grid">
+                <div>
+                  <label class="question-label" for="user_identity" style="font-size: 0.9rem; margin-bottom: 8px;">Nombre Completo <span class="required">*</span></label>
+                  <input type="text" id="user_identity" name="user_identity" class="input-text" placeholder="Escribe tu nombre completo..." required>
+                </div>
+                <div>
+                  <label class="question-label" for="user_category" style="font-size: 0.9rem; margin-bottom: 8px;">Categoría <span class="required">*</span></label>
+                  <select id="user_category" name="user_category" class="input-select" required>
+                    <option value="" disabled selected>Selecciona tu categoría...</option>
+                    <option value="Docentes">Docentes</option>
+                    <option value="Asistentes de la educación">Asistentes de la educación</option>
+                  </select>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -445,8 +467,9 @@
                 <select id="select-filter-question" class="input-select">
                   <option value="q2">Q2: Mayor Fortaleza ("Súperpoderes")</option>
                   <option value="q3">Q3: Fricciones Diarias y Obstáculos</option>
+                  <option value="q3b">Q3.5: Carencias y Necesidades principales</option>
                   <option value="q5">Q5: La Varita Mágica (Nuevas ideas)</option>
-                  <option value="q6">Q6: Talentos Ocultos no Aprovechados</option>
+                  <option value="q6">Q6: Fortalecimiento Colectivo del Equipo</option>
                   <option value="q7">Q7: Visión de Futuro a fin de año</option>
                   <option value="q10">Q10: Espacio Libre / Mensajes urgentes</option>
                 </select>

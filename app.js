@@ -7,13 +7,14 @@ let responsesList = [];
 const SAMPLE_RESPONSES = [
   {
     timestamp: "28/05/2026 22:15:30",
-    identity: "Marta R. (Coordinadora)",
+    identity: "Marta R. (Docentes)",
     q1_motivation: "El compañerismo y la unión del equipo",
     q2_superpowers: "La velocidad de resolución cuando falla algún sistema central sin necesidad de supervisión.",
     q3_friction: "La lentitud para recibir soporte informático crítico cuando hay cortes de servicio pasadas las 12 de la noche.",
+    q3b_needs: "Mejorar la conectividad Wi-Fi de alta velocidad en las salas comunes y salas de clases.",
     q4_tools: 3,
     q5_magic_wand: "Establecer una guardia mínima técnica de IT remota de guardia activa para la jornada nocturna.",
-    q6_hidden_talents: "Soy muy buena diseñando infografías y guías visuales de autoayuda para usuarios rápidos.",
+    q6_team_strengths: "Fortalecer la capacitación colectiva en el uso de herramientas de aprendizaje híbrido y digital.",
     q7_future_vision: "Visualizo un entorno donde los procesos críticos no se detengan por falta de firmas administrativas.",
     q8_risks: ["Falta de comunicación institucional", "Falta de capacitación adaptada"],
     q9_influence: 4,
@@ -21,13 +22,14 @@ const SAMPLE_RESPONSES = [
   },
   {
     timestamp: "28/05/2026 22:40:12",
-    identity: "",
+    identity: "Anónimo (Asistentes de la educación)",
     q1_motivation: "El impacto directo en los estudiantes/usuarios",
     q2_superpowers: "La empatía y la gran paciencia que tenemos con los usuarios nerviosos a altas horas.",
     q3_friction: "Falta de iluminación en el estacionamiento secundario, lo que genera sensación de inseguridad al salir.",
+    q3b_needs: "Instalación de cámaras de seguridad y mayor presencia de personal de vigilancia en los accesos.",
     q4_tools: 4,
     q5_magic_wand: "Una bitácora digital compartida y automatizada para traspasar novedades al turno mañana.",
-    q6_hidden_talents: "Tengo amplios conocimientos en primeros auxilios y gestión de crisis psicológicas.",
+    q6_team_strengths: "Coordinar talleres de primeros auxilios y manejo de emergencias a nivel de todo el personal nocturno.",
     q7_future_vision: "Tener mayor integración con las decisiones generales y sentirnos valorados por igual.",
     q8_risks: ["Temas de seguridad física/entorno"],
     q9_influence: 3,
@@ -35,13 +37,14 @@ const SAMPLE_RESPONSES = [
   },
   {
     timestamp: "29/05/2026 01:10:05",
-    identity: "Carlos Gómez",
+    identity: "Carlos Gómez (Docentes)",
     q1_motivation: "La flexibilidad horaria y conciliación",
     q2_superpowers: "Solidaridad absoluta. Si alguien se enferma o tiene un problema, nos cubrimos sin dudar.",
     q3_friction: "La cafetería y los expendedores automáticos a menudo están vacíos o no funcionan durante la noche.",
+    q3b_needs: "Un sistema de abastecimiento confiable de alimentos saludables para el personal del turno de la noche.",
     q4_tools: 2,
     q5_magic_wand: "Un convenio de catering nocturno saludable o reposición garantizada de máquinas.",
-    q6_hidden_talents: "Organización de bases de datos y automatización de reportes manuales en Excel.",
+    q6_team_strengths: "Desarrollar capacidades en análisis de datos y sistematización de reportes internos.",
     q7_future_vision: "Procesos 100% digitalizados sin papeles innecesarios que atrasen el flujo.",
     q8_risks: ["Excesiva carga laboral / Agotamiento", "Falta de comunicación institucional"],
     q9_influence: 5,
@@ -49,13 +52,14 @@ const SAMPLE_RESPONSES = [
   },
   {
     timestamp: "29/05/2026 02:30:15",
-    identity: "",
+    identity: "Anónimo (Asistentes de la educación)",
     q1_motivation: "El compañerismo y la unión del equipo",
     q2_superpowers: "Capacidad de autogestión y tranquilidad ante picos de demanda.",
     q3_friction: "El software de registro es muy lento y requiere 6 clicks para tareas sencillas que podrían automatizarse.",
+    q3b_needs: "Actualización de las licencias de software y renovación de equipos informáticos obsoletos.",
     q4_tools: 3,
     q5_magic_wand: "Simplificar la interfaz de registro de usuarios reduciendo campos obligatorios redundantes.",
-    q6_hidden_talents: "Capacitación de personal nuevo. Puedo transferir conocimientos de forma ágil y práctica.",
+    q6_team_strengths: "Fortalecer la comunicación inter-turnos para un traspaso de información más fluido.",
     q7_future_vision: "Expectativa de recibir al menos una capacitación técnica formal al año.",
     q8_risks: ["Falta de capacitación adaptada"],
     q9_influence: 2,
@@ -63,13 +67,14 @@ const SAMPLE_RESPONSES = [
   },
   {
     timestamp: "29/05/2026 03:45:00",
-    identity: "Lucía Pérez",
+    identity: "Lucía Pérez (Asistentes de la educación)",
     q1_motivation: "La autonomía y tranquilidad del horario nocturno",
     q2_superpowers: "Mantener la calma en emergencias operativas extremas.",
     q3_friction: "La temperatura en el bloque B de oficinas es sumamente fría y el termostato no se puede regular desde aquí.",
+    q3b_needs: "Mantenimiento preventivo de los sistemas de calefacción y climatización de las salas de trabajo.",
     q4_tools: 4,
     q5_magic_wand: "Permitir regulación local de temperatura o proveer climatización adecuada.",
-    q6_hidden_talents: "Mediación de conflictos interpersonales dentro de equipos.",
+    q6_team_strengths: "Implementar protocolos claros de resolución de incidencias complejas sin depender de jefaturas de día.",
     q7_future_vision: "Tener canales fluidos de comunicación con la directiva sin tanta burocracia.",
     q8_risks: ["Falta de comunicación institucional"],
     q9_influence: 3,
@@ -382,9 +387,10 @@ function submitSurvey() {
 
   const q2_val = document.getElementById("q2_superpowers").value.trim();
   const q3_val = document.getElementById("q3_friction").value.trim();
+  const q3b_val = document.getElementById("q3b_needs").value.trim();
   const q4_val = parseInt(formData.get("q4_tools"));
   const q5_val = document.getElementById("q5_magic_wand").value.trim();
-  const q6_val = document.getElementById("q6_hidden_talents").value.trim();
+  const q6_val = document.getElementById("q6_team_strengths").value.trim();
   const q7_val = document.getElementById("q7_future_vision").value.trim();
 
   // Handle checkboxes for q8
@@ -400,7 +406,9 @@ function submitSurvey() {
 
   const q9_val = parseInt(formData.get("q9_influence"));
   const q10_val = document.getElementById("q10_final_pulse").value.trim();
-  const identity_val = document.getElementById("user_identity").value.trim();
+  const raw_identity = document.getElementById("user_identity").value.trim();
+  const category_val = document.getElementById("user_category").value;
+  const identity_val = `${raw_identity} (${category_val})`;
 
   // Create response object
   const now = new Date();
@@ -412,9 +420,10 @@ function submitSurvey() {
     q1_motivation: q1_val,
     q2_superpowers: q2_val,
     q3_friction: q3_val,
+    q3b_needs: q3b_val,
     q4_tools: q4_val,
     q5_magic_wand: q5_val,
-    q6_hidden_talents: q6_val,
+    q6_team_strengths: q6_val,
     q7_future_vision: q7_val,
     q8_risks: q8_checked,
     q9_influence: q9_val,
@@ -647,8 +656,9 @@ function renderOpenResponses() {
   const keyMap = {
     q2: { prop: "q2_superpowers", label: "Mayor Fortaleza" },
     q3: { prop: "q3_friction", label: "Fricción Diaria" },
+    q3b: { prop: "q3b_needs", label: "Carencias y Necesidades" },
     q5: { prop: "q5_magic_wand", label: "Propuesta de Varita Mágica" },
-    q6: { prop: "q6_hidden_talents", label: "Talento Oculto" },
+    q6: { prop: "q6_team_strengths", label: "Fortalecimiento Colectivo" },
     q7: { prop: "q7_future_vision", label: "Expectativa de Futuro" },
     q10: { prop: "q10_final_pulse", label: "Comentario Extra" }
   };
@@ -701,9 +711,9 @@ function exportToCSV() {
 
   // Headers (Spanish)
   const headers = [
-    "Marca de Tiempo", "Identificación", "Q1: Motivación", "Q2: Fortaleza / Superpoder",
-    "Q3: Mayor Obstáculo / Fricción", "Q4: Evaluación Herramientas (1-5)",
-    "Q5: Propuesta de Varita Mágica", "Q6: Talento Oculto", "Q7: Expectativa fin de año",
+    "Marca de Tiempo", "Identificación", "Q1: ¿Qué destaca al equipo?", "Q2: Fortaleza / Superpoder",
+    "Q3: Obstáculo / Fricción", "Q3.5: Carencias / Necesidades", "Q4: Evaluación Herramientas (1-5)",
+    "Q5: Propuesta de Varita Mágica", "Q6: Fortalecimiento Colectivo", "Q7: Expectativa fin de año",
     "Q8: Inquietudes / Amenazas", "Q9: Capacidad de Influencia (1-5)", "Q10: Espacio Libre / Comentario"
   ];
 
@@ -717,9 +727,10 @@ function exportToCSV() {
       r.q1_motivation || "",
       r.q2_superpowers || "",
       r.q3_friction || "",
+      r.q3b_needs || "",
       r.q4_tools || "",
       r.q5_magic_wand || "",
-      r.q6_hidden_talents || "",
+      r.q6_team_strengths || "",
       r.q7_future_vision || "",
       (r.q8_risks || []).join(" | "),
       r.q9_influence || "",
