@@ -36,27 +36,55 @@
       
       <!-- SURVEY WIZARD SECTION -->
       <section id="survey-section" class="content-card active">
-        <!-- Start Screen -->
+        <!-- Start Screen (2 Premium Option Panels) -->
         <div id="survey-welcome" class="wizard-step active">
-          <div class="welcome-hero">
-            <span class="hero-badge">🌟 Tu voz importa</span>
-            <h2>Construyamos el futuro de nuestra jornada juntos</h2>
-            <p class="welcome-description">
-              Esta encuesta estratégica está diseñada para extraer información profunda de manera ágil y empática. 
-              Tus respuestas nos ayudarán a entender dónde estamos, cuáles son nuestras mayores fortalezas y hacia dónde debemos crecer.
+          <div class="welcome-hero" style="max-width: 900px;">
+            <span class="hero-badge">🌙 Portal de Escucha Activa</span>
+            <h2>¿Cómo deseas aportar hoy a nuestra Jornada Nocturna?</h2>
+            <p class="welcome-description" style="margin-bottom: 40px;">
+              Selecciona una de las dos vías estratégicas para compartir tus ideas, inquietudes o aportes con el equipo directivo.
             </p>
-            <div class="privacy-notice">
-              <span class="icon">🛡️</span>
-              <p><strong>100% Confidencial y Transparente:</strong> Puedes responder de forma totalmente anónima. La honestidad es nuestro insumo más valioso.</p>
+            
+            <div class="portal-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; margin-bottom: 40px;">
+              
+              <!-- Panel 1: Encuesta Estratégica -->
+              <div class="portal-card" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 32px; border-radius: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition-smooth); border-top: 4px solid var(--accent-primary);">
+                <div>
+                  <span style="font-size: 2.2rem; display: block; margin-bottom: 16px;">🌟</span>
+                  <h3 style="font-family: var(--font-title); font-size: 1.4rem; font-weight: 700; margin-bottom: 8px;">1. Encuesta Estratégica Anual</h3>
+                  <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">
+                    Cuestionario formal de 10 preguntas diseñado para evaluar fortalezas, carencias críticas y planificar el futuro de nuestra jornada nocturna.
+                  </p>
+                </div>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                  <button id="btn-start-survey" class="btn btn-primary" style="flex: 1;">
+                    <span>Responder Digital</span>
+                  </button>
+                  <button id="btn-print-survey" class="btn btn-secondary" title="Descargar versión en papel">
+                    <span>🖨️ Imprimir</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Panel 2: Buzón de Inquietudes -->
+              <div class="portal-card" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 32px; border-radius: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition-smooth); border-top: 4px solid var(--accent-cyan);">
+                <div>
+                  <span style="font-size: 2.2rem; display: block; margin-bottom: 16px;">📣</span>
+                  <h3 style="font-family: var(--font-title); font-size: 1.4rem; font-weight: 700; margin-bottom: 8px;">2. Inquietudes y Sugerencias</h3>
+                  <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">
+                    Canal continuo y permanente. Reporta aquí alertas de seguridad, problemas urgentes de infraestructura o comparte propuestas de mejora rápidas.
+                  </p>
+                </div>
+                <button id="btn-start-suggestions" class="btn btn-secondary" style="border-color: var(--accent-cyan); color: var(--text-primary); box-shadow: 0 0 10px rgba(6, 182, 212, 0.1);">
+                  <span>✍️ Abrir Buzón Directo</span>
+                </button>
+              </div>
+
             </div>
-            <div class="welcome-buttons" style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 32px;">
-              <button id="btn-start-survey" class="btn btn-primary btn-large">
-                <span>Comenzar Encuesta Digital</span>
-                <span class="arrow">→</span>
-              </button>
-              <button id="btn-print-survey" class="btn btn-secondary btn-large">
-                <span>🖨️ Imprimir en Papel (Físico)</span>
-              </button>
+
+            <div class="privacy-notice" style="margin-top: 24px;">
+              <span class="icon">🛡️</span>
+              <p>Ambos canales son completamente confidenciales y gestionados con la máxima transparencia por el equipo directivo.</p>
             </div>
           </div>
         </div>
@@ -379,6 +407,68 @@
 
         </form>
 
+        <!-- SUGGESTIONS FORM -->
+        <form id="suggestions-form" onsubmit="return false;" style="display: none;">
+          <div class="block-header">
+            <span class="block-num">Buzón Continuo</span>
+            <h3>📣 Buzón de Inquietudes y Sugerencias</h3>
+            <p class="block-desc">Comparte alertas urgentes o ideas prácticas para mejorar la jornada nocturna de inmediato.</p>
+          </div>
+
+          <!-- Registro Identificación -->
+          <div class="question-card">
+            <label class="question-label">
+              📋 Registro de Identificación
+              <span class="required">*</span>
+            </label>
+            <p class="question-help">
+              Ingresa tus datos para registrar formalmente tu propuesta en el buzón.
+            </p>
+            <div class="options-grid">
+              <div>
+                <label class="question-label" for="sug_identity" style="font-size: 0.9rem; margin-bottom: 8px;">Nombre Completo <span class="required">*</span></label>
+                <input type="text" id="sug_identity" name="sug_identity" class="input-text" placeholder="Escribe tu nombre completo..." required>
+              </div>
+              <div>
+                <label class="question-label" for="sug_category" style="font-size: 0.9rem; margin-bottom: 8px;">Categoría <span class="required">*</span></label>
+                <select id="sug_category" name="sug_category" class="input-select" required>
+                  <option value="" disabled selected>Selecciona tu categoría...</option>
+                  <option value="Docentes">Docentes</option>
+                  <option value="Asistentes de la educación">Asistentes de la educación</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pregunta A: Inquietudes -->
+          <div class="question-card">
+            <label class="question-label" for="sug_question_a">
+              1. ¿Qué inquietud, alerta o situación urgente deseas reportar actualmente en la jornada nocturna?
+              <span class="required">*</span>
+            </label>
+            <textarea id="sug_question_a" name="sug_question_a" class="input-textarea" placeholder="Describe aquí la alerta, incidente o preocupación detalladamente..." required></textarea>
+          </div>
+
+          <!-- Pregunta B: Sugerencias -->
+          <div class="question-card">
+            <label class="question-label" for="sug_question_b">
+              2. ¿Qué sugerencia, idea o propuesta tienes para mejorar nuestro entorno de trabajo?
+              <span class="required">*</span>
+            </label>
+            <textarea id="sug_question_b" name="sug_question_b" class="input-textarea" placeholder="Describe tu propuesta y cómo resolvería el problema identificado..." required></textarea>
+          </div>
+
+          <!-- Buttons -->
+          <div class="wizard-footer">
+            <button type="button" id="btn-back-suggestions" class="btn btn-secondary">
+              <span>← Volver al Inicio</span>
+            </button>
+            <button type="submit" id="btn-submit-suggestions" class="btn btn-primary" style="background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-primary) 100%); box-shadow: var(--glow-cyan);">
+              <span>🚀 Enviar al Buzón</span>
+            </button>
+          </div>
+        </form>
+
         <!-- Success Screen -->
         <div id="survey-success" class="wizard-step" style="display: none;">
           <div class="success-hero">
@@ -480,6 +570,8 @@
                   <option value="q6">Q6: Fortalecimiento Colectivo del Equipo</option>
                   <option value="q7">Q7: Visión de Futuro a fin de año</option>
                   <option value="q10">Q10: Espacio Libre / Mensajes urgentes</option>
+                  <option value="sug_a">Buzón: Inquietud o Alerta Urgente</option>
+                  <option value="sug_b">Buzón: Sugerencia o Propuesta</option>
                 </select>
               </div>
             </div>

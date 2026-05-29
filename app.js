@@ -16,11 +16,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const responsesRef = ref(db, "responses");
+const suggestionsRef = ref(db, "suggestions");
 
 // --- Application State ---
 let currentStepIndex = 0; // 0: Welcome, 1: Block 1, 2: Block 2, 3: Block 3, 4: Block 4, 5: Success
 const TOTAL_BLOCKS = 4;
 let responsesList = [];
+let suggestionsList = [];
 
 // --- Sample Responses for Simulation ---
 const SAMPLE_RESPONSES = [
@@ -105,14 +107,24 @@ const SAMPLE_RESPONSES = [
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
   
-  // Listen for real-time changes in Firebase database
+  // Listen for real-time changes in Firebase database (Survey)
   onValue(responsesRef, (snapshot) => {
     const data = snapshot.val();
     if (data) {
-      // Map Firebase object of objects to our local array of responses
       responsesList = Object.keys(data).map(key => data[key]);
     } else {
       responsesList = [];
+    }
+    updateDashboardMetrics();
+  });
+
+  // Listen for real-time changes in Firebase database (Suggestions)
+  onValue(suggestionsRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      suggestionsList = Object.keys(data).map(key => data[key]);
+    } else {
+      suggestionsList = [];
     }
     updateDashboardMetrics();
   });
@@ -127,6 +139,26 @@ function setupEventListeners() {
 
   document.getElementById("btn-print-survey").addEventListener("click", () => {
     window.print();
+  });
+
+  // Suggestions flow triggers
+  document.getElementById("btn-start-suggestions").addEventListener("click", () => {
+    document.getElementById("survey-welcome").classList.remove("active");
+    document.getElementById("suggestions-form").style.display = "block";
+    currentStepIndex = 99; // custom state
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.getElementById("btn-back-suggestions").addEventListener("click", () => {
+    document.getElementById("suggestions-form").style.display = "none";
+    document.getElementById("survey-welcome").classList.add("active");
+    currentStepIndex = 0;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.getElementById("suggestions-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    submitSuggestions();
   });
 
   document.getElementById("btn-next-step").addEventListener("click", () => {
@@ -165,7 +197,7 @@ function setupEventListeners() {
   // Clear Database
   document.getElementById("btn-clear-data").addEventListener("click", () => {
     if (confirm("⚠️ ¿Estás seguro de que deseas eliminar permanentemente TODAS las respuestas de la base de datos? Esta acción es irreversible.")) {
-      set(responsesRef, null)
+      Promise.all([set(responsesRef, null), set(suggestionsRef, null)])
         .then(() => {
           alert("✅ Base de datos limpiada con éxito.");
         })
@@ -475,6 +507,45 @@ function submitSurvey() {
     });
 }
 
+// --- Gather suggestions and submit ---
+function submitSuggestions() {
+  const form = document.getElementById("suggestions-form");
+  const identity = document.getElementById("sug_identity").value.trim();
+  const category = document.getElementById("sug_category").value;
+  const questionA = document.getElementById("sug_question_a").value.trim();
+  const questionB = document.getElementById("sug_question_b").value.trim();
+
+  const now = new Date();
+  const timestampStr = `${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+
+  const suggestionObj = {
+    timestamp: timestampStr,
+    identity: `${identity} (${category})`,
+    sug_question_a: questionA,
+    sug_question_b: questionB
+  };
+
+  // Push to Firebase suggestionsRef
+  push(suggestionsRef, suggestionObj)
+    .then(() => {
+      form.reset();
+      document.getElementById("suggestions-form").style.display = "none";
+      document.getElementById("survey-welcome").classList.add("active");
+      currentStepIndex = 0;
+      goToStep(5);
+    })
+    .catch((error) => {
+      console.error("Error al guardar sugerencia en Firebase:", error);
+      // Fallback
+      suggestionsList.push(suggestionObj);
+      form.reset();
+      document.getElementById("suggestions-form").style.display = "none";
+      document.getElementById("survey-welcome").classList.add("active");
+      currentStepIndex = 0;
+      goToStep(5);
+    });
+}
+
 function pad(num) {
   return num.toString().padStart(2, '0');
 }
@@ -496,11 +567,32 @@ function resetSurveyForm() {
   });
 }
 
+// --- Sample Suggestions for Simulation ---
+const SAMPLE_SUGGESTIONS = [
+  {
+    timestamp: "29/05/2026 10:15:00",
+    identity: "Patricia Soto (Asistentes de la educación)",
+    sug_question_a: "Falta personal de limpieza para el comedor nocturno después de la cena.",
+    sug_question_b: "Establecer roles rotativos o contratar un servicio de aseo básico por horas pasadas las 10 PM."
+  },
+  {
+    timestamp: "29/05/2026 12:30:00",
+    identity: "Marcos Retamal (Docentes)",
+    sug_question_a: "Algunos proyectores en el segundo piso parpadean constantemente.",
+    sug_question_b: "Hacer una revisión técnica preventiva mensual de los laboratorios y aulas durante el fin de semana."
+  }
+];
+
 // --- Simulate Sample Responses ---
 function simulateData() {
-  // Push each sample response to Firebase Realtime Database
+  // Push each sample response to Firebase Realtime Database (Survey)
   SAMPLE_RESPONSES.forEach(r => {
     push(responsesRef, r);
+  });
+
+  // Push sample suggestions
+  SAMPLE_SUGGESTIONS.forEach(s => {
+    push(suggestionsRef, s);
   });
   
   // Flash effect on total responses metric to show change
@@ -698,11 +790,16 @@ function renderOpenResponses() {
     q5: { prop: "q5_magic_wand", label: "Propuesta de Varita Mágica" },
     q6: { prop: "q6_team_strengths", label: "Fortalecimiento Colectivo" },
     q7: { prop: "q7_future_vision", label: "Expectativa de Futuro" },
-    q10: { prop: "q10_final_pulse", label: "Comentario Extra" }
+    q10: { prop: "q10_final_pulse", label: "Comentario Extra" },
+    sug_a: { prop: "sug_question_a", label: "Buzón: Inquietud Urgente" },
+    sug_b: { prop: "sug_question_b", label: "Buzón: Sugerencia o Propuesta" }
   };
 
   const currentMap = keyMap[activeQuestionKey];
-  const listItems = responsesList.filter(r => r[currentMap.prop] && r[currentMap.prop].trim() !== "");
+  const isSuggestion = activeQuestionKey.startsWith("sug_");
+  const listToFilter = isSuggestion ? suggestionsList : responsesList;
+
+  const listItems = listToFilter.filter(r => r[currentMap.prop] && r[currentMap.prop].trim() !== "");
 
   if (listItems.length === 0) {
     container.innerHTML = `<div class="no-data-placeholder">No hay respuestas escritas para esta pregunta</div>`;
