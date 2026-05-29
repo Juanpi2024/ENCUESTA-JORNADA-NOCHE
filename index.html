@@ -39,25 +39,25 @@
         <!-- Start Screen (2 Premium Option Panels) -->
         <div id="survey-welcome" class="wizard-step active">
           <div class="welcome-hero" style="max-width: 900px;">
-            <span class="hero-badge">🌙 Portal de Escucha Activa</span>
-            <h2>¿Cómo deseas aportar hoy a nuestra Jornada Nocturna?</h2>
+            <span class="hero-badge" style="background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); color: #cbd5e1;">🏛️ Portal de Participación y Escucha Activa</span>
+            <h2>Jornada Nocturna</h2>
             <p class="welcome-description" style="margin-bottom: 40px;">
-              Selecciona una de las dos vías estratégicas para compartir tus ideas, inquietudes o aportes con el equipo directivo.
+              Bienvenido al portal institucional. Por favor, completa el cuestionario estratégico obligatorio anual o utiliza el buzón voluntario permanente para reportar inquietudes o sugerencias.
             </p>
             
             <div class="portal-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; margin-bottom: 40px;">
               
               <!-- Panel 1: Encuesta Estratégica -->
-              <div class="portal-card" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 32px; border-radius: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition-smooth); border-top: 4px solid var(--accent-primary);">
+              <div class="portal-card" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 32px; border-radius: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition-smooth); border-top: 4px solid #ef4444; box-shadow: 0 4px 20px rgba(239, 68, 68, 0.05);">
                 <div>
-                  <span style="font-size: 2.2rem; display: block; margin-bottom: 16px;">🌟</span>
-                  <h3 style="font-family: var(--font-title); font-size: 1.4rem; font-weight: 700; margin-bottom: 8px;">1. Encuesta Estratégica Anual</h3>
+                  <span style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #f87171; font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 12px;">🔴 Proceso Obligatorio</span>
+                  <h3 style="font-family: var(--font-title); font-size: 1.4rem; font-weight: 700; margin-bottom: 8px;">1. Encuesta Estratégica 2026</h3>
                   <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">
-                    Cuestionario formal de 10 preguntas diseñado para evaluar fortalezas, carencias críticas y planificar el futuro de nuestra jornada nocturna.
+                    Evaluación estructurada anual de 10 preguntas. Su llenado es requerido para evaluar fortalezas, carencias y planificar el futuro de nuestra jornada nocturna.
                   </p>
                 </div>
                 <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                  <button id="btn-start-survey" class="btn btn-primary" style="flex: 1;">
+                  <button id="btn-start-survey" class="btn btn-primary" style="flex: 1; background: linear-gradient(135deg, #ef4444 0%, var(--accent-secondary) 100%); box-shadow: 0 0 15px rgba(239, 68, 68, 0.25);">
                     <span>Responder Digital</span>
                   </button>
                   <button id="btn-print-survey" class="btn btn-secondary" title="Descargar versión en papel">
@@ -67,12 +67,12 @@
               </div>
 
               <!-- Panel 2: Buzón de Inquietudes -->
-              <div class="portal-card" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 32px; border-radius: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition-smooth); border-top: 4px solid var(--accent-cyan);">
+              <div class="portal-card" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 32px; border-radius: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: var(--transition-smooth); border-top: 4px solid var(--accent-cyan); box-shadow: 0 4px 20px rgba(6, 182, 212, 0.05);">
                 <div>
-                  <span style="font-size: 2.2rem; display: block; margin-bottom: 16px;">📣</span>
-                  <h3 style="font-family: var(--font-title); font-size: 1.4rem; font-weight: 700; margin-bottom: 8px;">2. Inquietudes y Sugerencias</h3>
+                  <span style="background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.2); color: var(--accent-cyan); font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 12px;">🟢 Canal Abierto Permanente</span>
+                  <h3 style="font-family: var(--font-title); font-size: 1.4rem; font-weight: 700; margin-bottom: 8px;">2. Buzón de Inquietudes</h3>
                   <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">
-                    Canal continuo y permanente. Reporta aquí alertas de seguridad, problemas urgentes de infraestructura o comparte propuestas de mejora rápidas.
+                    Canal complementario y voluntario. Disponible a tu disposición en cualquier momento del año para enviar sugerencias o reportar inquietudes urgentes.
                   </p>
                 </div>
                 <button id="btn-start-suggestions" class="btn btn-secondary" style="border-color: var(--accent-cyan); color: var(--text-primary); box-shadow: 0 0 10px rgba(6, 182, 212, 0.1);">
