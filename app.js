@@ -1,3 +1,22 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+// --- Firebase Configuration ---
+const firebaseConfig = {
+  apiKey: "AIzaSyDy18QuWkFsp69GZxLQEr0eSc6_C7cwp9Y",
+  authDomain: "encuesta-noche-ceia-2026.firebaseapp.com",
+  databaseURL: "https://encuesta-noche-ceia-2026-default-rtdb.firebaseio.com",
+  projectId: "encuesta-noche-ceia-2026",
+  storageBucket: "encuesta-noche-ceia-2026.firebasestorage.app",
+  messagingSenderId: "846745141431",
+  appId: "1:846745141431:web:98662bb0988d7c7c574d32"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const responsesRef = ref(db, "responses");
+
 // --- Application State ---
 let currentStepIndex = 0; // 0: Welcome, 1: Block 1, 2: Block 2, 3: Block 3, 4: Block 4, 5: Success
 const TOTAL_BLOCKS = 4;
@@ -84,26 +103,20 @@ const SAMPLE_RESPONSES = [
 
 // --- Initializer ---
 document.addEventListener("DOMContentLoaded", () => {
-  loadFromLocalStorage();
   setupEventListeners();
-  updateDashboardMetrics();
-});
-
-// --- LocalStorage Logic ---
-function loadFromLocalStorage() {
-  const stored = localStorage.getItem("night_shift_survey_responses");
-  if (stored) {
-    try {
-      responsesList = JSON.parse(stored);
-    } catch (e) {
+  
+  // Listen for real-time changes in Firebase database
+  onValue(responsesRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      // Map Firebase object of objects to our local array of responses
+      responsesList = Object.keys(data).map(key => data[key]);
+    } else {
       responsesList = [];
     }
-  }
-}
-
-function saveToLocalStorage() {
-  localStorage.setItem("night_shift_survey_responses", JSON.stringify(responsesList));
-}
+    updateDashboardMetrics();
+  });
+});
 
 // --- Event Listeners Setup ---
 function setupEventListeners() {
@@ -434,12 +447,18 @@ function submitSurvey() {
     q10_final_pulse: q10_val
   };
 
-  // Add to array, save and update metrics
-  responsesList.push(responseObj);
-  saveToLocalStorage();
-  
-  // Go to success step
-  goToStep(5);
+  // Add to Firebase Realtime Database
+  push(responsesRef, responseObj)
+    .then(() => {
+      // Go to success step
+      goToStep(5);
+    })
+    .catch((error) => {
+      console.error("Error al guardar en Firebase:", error);
+      // Fallback: add locally to proceed anyway
+      responsesList.push(responseObj);
+      goToStep(5);
+    });
 }
 
 function pad(num) {
@@ -465,9 +484,10 @@ function resetSurveyForm() {
 
 // --- Simulate Sample Responses ---
 function simulateData() {
-  responsesList = [...SAMPLE_RESPONSES, ...responsesList];
-  saveToLocalStorage();
-  updateDashboardMetrics();
+  // Push each sample response to Firebase Realtime Database
+  SAMPLE_RESPONSES.forEach(r => {
+    push(responsesRef, r);
+  });
   
   // Flash effect on total responses metric to show change
   const totalEl = document.getElementById("stat-total-responses");
