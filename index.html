@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Voz de la Noche - Encuesta Estratégica</title>
+  <meta name="description" content="Una plataforma interactiva para escuchar y potenciar a nuestro equipo de la jornada nocturna.">
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Background Effects -->
+  <div class="bg-stars"></div>
+  <div class="bg-aurora"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="logo-icon">🌙</span>
+        <div class="logo-text">
+          <h1>La Voz de la Noche</h1>
+          <p>Jornada Nocturna • Encuesta Estratégica</p>
+        </div>
+      </div>
+      <button id="btn-toggle-view" class="btn btn-secondary btn-icon" title="Ver Resultados / Panel Administrador">
+        <span class="icon">📊</span> <span class="text">Ver Resultados</span>
+      </button>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- SURVEY WIZARD SECTION -->
+      <section id="survey-section" class="content-card active">
+        <!-- Start Screen -->
+        <div id="survey-welcome" class="wizard-step active">
+          <div class="welcome-hero">
+            <span class="hero-badge">🌟 Tu voz importa</span>
+            <h2>Construyamos el futuro de nuestra jornada juntos</h2>
+            <p class="welcome-description">
+              Esta encuesta estratégica está diseñada para extraer información profunda de manera ágil y empática. 
+              Tus respuestas nos ayudarán a entender dónde estamos, cuáles son nuestras mayores fortalezas y hacia dónde debemos crecer.
+            </p>
+            <div class="privacy-notice">
+              <span class="icon">🛡️</span>
+              <p><strong>100% Confidencial y Transparente:</strong> Puedes responder de forma totalmente anónima. La honestidad es nuestro insumo más valioso.</p>
+            </div>
+            <button id="btn-start-survey" class="btn btn-primary btn-large">
+              <span>Comenzar Encuesta</span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Survey Steps (Dynamic) -->
+        <form id="survey-form" onsubmit="return false;" style="display: none;">
+          
+          <!-- Progress Indicator -->
+          <div class="progress-container">
+            <div class="progress-bar-track">
+              <div id="survey-progress-bar" class="progress-bar-fill" style="width: 0%;"></div>
+            </div>
+            <div class="progress-steps-info">
+              <span id="survey-step-title">Bloque 1 de 4: Fortalezas</span>
+              <span id="survey-step-percentage">0% completado</span>
+            </div>
+          </div>
+
+          <!-- BLOQUE 1: Fortalezas y Sentido de Pertenencia -->
+          <div id="step-block-1" class="wizard-step">
+            <div class="block-header">
+              <span class="block-num">Bloque 1</span>
+              <h3>🌟 Fortalezas y Sentido de Pertenencia</h3>
+              <p class="block-desc">Descubramos qué estamos haciendo bien y qué une a nuestro equipo nocturno.</p>
+            </div>
+
+            <!-- Pregunta 1 -->
+            <div class="question-card" id="q-card-1">
+              <label class="question-label">
+                1. ¿Qué es lo que más te motiva y te hace sentir orgulloso de pertenecer al equipo de la jornada nocturna?
+                <span class="required">*</span>
+              </label>
+              <div class="options-grid">
+                <label class="option-button">
+                  <input type="radio" name="q1_motivation" value="El compañerismo y la unión del equipo" required>
+                  <span class="option-content">
+                    <span class="option-emoji">🤝</span>
+                    <span class="option-text">El compañerismo y la unión del equipo</span>
+                  </span>
+                </label>
+                <label class="option-button">
+                  <input type="radio" name="q1_motivation" value="El impacto directo en los estudiantes/usuarios">
+                  <span class="option-content">
+                    <span class="option-emoji">🎓</span>
+                    <span class="option-text">El impacto directo en los estudiantes/usuarios</span>
+                  </span>
+                </label>
+                <label class="option-button">
+                  <input type="radio" name="q1_motivation" value="La flexibilidad horaria y conciliación">
+                  <span class="option-content">
+                    <span class="option-emoji">🕒</span>
+                    <span class="option-text">La flexibilidad horaria y conciliación</span>
+                  </span>
+                </label>
+                <label class="option-button">
+                  <input type="radio" name="q1_motivation" value="La autonomía y tranquilidad del horario nocturno">
+                  <span class="option-content">
+                    <span class="option-emoji">🌌</span>
+                    <span class="option-text">La autonomía y tranquilidad del horario nocturno</span>
+                  </span>
+                </label>
+                <label class="option-button" id="q1-option-other">
+                  <input type="radio" name="q1_motivation" value="Otro">
+                  <span class="option-content">
+                    <span class="option-emoji">✏️</span>
+                    <span class="option-text">Otro motivo...</span>
+                  </span>
+                </label>
+              </div>
+              <div id="q1-other-input-container" class="other-input-wrapper" style="display: none;">
+                <input type="text" id="q1_motivation_other" class="input-text" placeholder="Escribe tu propio motivo aquí...">
+              </div>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div class="question-card" id="q-card-2">
+              <label class="question-label" for="q2_superpowers">
+                2. Desde tu experiencia en el día a día, ¿cuál consideras que es la mayor fortaleza o &quot;súperpoder&quot; que tiene nuestro equipo frente a cualquier adversidad?
+                <span class="required">*</span>
+              </label>
+              <input type="text" id="q2_superpowers" name="q2_superpowers" class="input-text" placeholder="Ej: Resiliencia, comunicación rápida, empatía..." required>
+            </div>
+          </div>
+
+          <!-- BLOQUE 2: Necesidades y Debilidades -->
+          <div id="step-block-2" class="wizard-step">
+            <div class="block-header">
+              <span class="block-num">Bloque 2</span>
+              <h3>🌱 Necesidades y Debilidades</h3>
+              <p class="block-desc">Identifiquemos fricciones operativas y áreas donde falta apoyo constructivamente.</p>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="question-card" id="q-card-3">
+              <label class="question-label" for="q3_friction">
+                3. ¿Cuál consideras que es el mayor obstáculo, recurso faltante o frustración que dificulta tu labor o la hace más lenta durante la noche?
+                <span class="required">*</span>
+              </label>
+              <textarea id="q3_friction" name="q3_friction" class="input-textarea" placeholder="Describe la situación de manera constructiva para que podamos buscar una solución..." required></textarea>
+              <div class="char-count"><span id="q3-count">0</span> caracteres</div>
+            </div>
+
+            <!-- Pregunta 4 -->
+            <div class="question-card" id="q-card-4">
+              <label class="question-label">
+                4. ¿Sientes que cuentas con las herramientas (materiales, tecnológicas, de información y apoyo) necesarias para brindar un servicio de excelencia?
+                <span class="required">*</span>
+              </label>
+              <div class="scale-desc">
+                <span>1 = Nada de herramientas</span>
+                <span>5 = Absolutamente todo</span>
+              </div>
+              <div class="scale-container">
+                <label class="scale-item">
+                  <input type="radio" name="q4_tools" value="1" required>
+                  <span class="scale-number">1</span>
+                </label>
+                <label class="scale-item">
+                  <input type="radio" name="q4_tools" value="2">
+                  <span class="scale-number">2</span>
+                </label>
+                <label class="scale-item">
+                  <input type="radio" name="q4_tools" value="3">
+                  <span class="scale-number">3</span>
+                </label>
+                <label class="scale-item">
+                  <input type="radio" name="q4_tools" value="4">
+                  <span class="scale-number">4</span>
+                </label>
+                <label class="scale-item">
+                  <input type="radio" name="q4_tools" value="5">
+                  <span class="scale-number">5</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOQUE 3: Oportunidades y Expectativas -->
+          <div id="step-block-3" class="wizard-step">
+            <div class="block-header">
+              <span class="block-num">Bloque 3</span>
+              <h3>🚀 Oportunidades y Expectativas</h3>
+              <p class="block-desc">Fomentemos la visión de crecimiento profesional y el entorno de trabajo ideal.</p>
+            </div>
+
+            <!-- Pregunta 5 -->
+            <div class="question-card" id="q-card-5">
+              <label class="question-label" for="q5_magic_wand">
+                5. Si pudieras implementar una nueva herramienta, proceso o práctica mañana mismo para mejorar nuestro trabajo, ¿cuál sería y qué problema resolvería?
+                <span class="required">*</span>
+              </label>
+              <textarea id="q5_magic_wand" name="q5_magic_wand" class="input-textarea" placeholder="Deja volar tu creatividad: ¿cuál sería tu propuesta ideal?" required></textarea>
+            </div>
+
+            <!-- Pregunta 6 -->
+            <div class="question-card" id="q-card-6">
+              <label class="question-label" for="q6_hidden_talents">
+                6. ¿Qué habilidad, conocimiento o talento personal tienes que crees que podría aportar un gran valor al equipo, pero que actualmente no se está aprovechando al máximo?
+                <span class="required">*</span>
+              </label>
+              <textarea id="q6_hidden_talents" name="q6_hidden_talents" class="input-textarea" placeholder="Ej: Liderazgo, análisis de datos, mentoría, diseño, idiomas..." required></textarea>
+            </div>
+
+            <!-- Pregunta 7 -->
+            <div class="question-card" id="q-card-7">
+              <label class="question-label" for="q7_future_vision">
+                7. ¿Cuáles son tus principales expectativas para la jornada nocturna de aquí a fin de año? ¿Cómo visualizas nuestro entorno ideal de trabajo?
+                <span class="required">*</span>
+              </label>
+              <input type="text" id="q7_future_vision" name="q7_future_vision" class="input-text" placeholder="Ej: Mejor comunicación, procesos más fluidos, más capacitación..." required>
+            </div>
+          </div>
+
+          <!-- BLOQUE 4: Inquietudes, Amenazas e Influencia -->
+          <div id="step-block-4" class="wizard-step">
+            <div class="block-header">
+              <span class="block-num">Bloque 4</span>
+              <h3>🛡️ Inquietudes, Amenazas e Influencia</h3>
+              <p class="block-desc">Analicemos el nivel de seguridad psicológica y los riesgos que el equipo percibe.</p>
+            </div>
+
+            <!-- Pregunta 8 -->
+            <div class="question-card" id="q-card-8">
+              <label class="question-label">
+                8. ¿Qué aspectos del entorno actual te generan mayor inquietud o crees que podrían amenazar nuestro desempeño a corto/mediano plazo?
+                <span class="required">*</span> <span class="label-info">(Selecciona todas las que apliquen)</span>
+              </label>
+              <div class="options-grid">
+                <label class="option-button">
+                  <input type="checkbox" name="q8_risks" value="Falta de comunicación institucional">
+                  <span class="option-content">
+                    <span class="option-emoji">🔇</span>
+                    <span class="option-text">Falta de comunicación</span>
+                  </span>
+                </label>
+                <label class="option-button">
+                  <input type="checkbox" name="q8_risks" value="Temas de seguridad física/entorno">
+                  <span class="option-content">
+                    <span class="option-emoji">🔒</span>
+                    <span class="option-text">Temas de seguridad nocturna</span>
+                  </span>
+                </label>
+                <label class="option-button">
+                  <input type="checkbox" name="q8_risks" value="Excesiva carga laboral / Agotamiento">
+                  <span class="option-content">
+                    <span class="option-emoji">🥵</span>
+                    <span class="option-text">Carga laboral / Agotamiento</span>
+                  </span>
+                </label>
+                <label class="option-button">
+                  <input type="checkbox" name="q8_risks" value="Falta de capacitación adaptada">
+                  <span class="option-content">
+                    <span class="option-emoji">📚</span>
+                    <span class="option-text">Falta de capacitación</span>
+                  </span>
+                </label>
+                <label class="option-button" id="q8-option-other">
+                  <input type="checkbox" name="q8_risks" value="Otro">
+                  <span class="option-content">
+                    <span class="option-emoji">✏️</span>
+                    <span class="option-text">Otro aspecto...</span>
+                  </span>
+                </label>
+              </div>
+              <div id="q8-other-input-container" class="other-input-wrapper" style="display: none;">
+                <input type="text" id="q8_risks_other" class="input-text" placeholder="Escribe tu propia inquietud aquí...">
+              </div>
+            </div>
+
+            <!-- Pregunta 9 -->
+            <div class="question-card" id="q-card-9">
+              <label class="question-label">
+                9. ¿Sientes que tus ideas, alertas y sugerencias son escuchadas y tienen un impacto real en las decisiones que se toman para la jornada?
+                <span class="required">*</span>
+              </label>
+              <div class="scale-desc">
+                <span>1 = Nunca me escuchan</span>
+                <span>5 = Mis ideas siempre generan impacto</span>
+              </div>
+              <div class="scale-container">
+                <label class="scale-item">
+                  <input type="radio" name="q9_influence" value="1" required>
+                  <span class="scale-number">1</span>
+                </label>
+                <label class="scale-item">
+                  <input type="radio" name="q9_influence" value="2">
+                  <span class="scale-number">2</span>
+                </label>
+                <label class="scale-item">
+                  <input type="radio" name="q9_influence" value="3">
+                  <span class="scale-number">3</span>
+                </label>
+                <label class="scale-item">
+                  <input type="radio" name="q9_influence" value="4">
+                  <span class="scale-number">4</span>
+                </label>
+                <label class="scale-item">
+                  <input type="radio" name="q9_influence" value="5">
+                  <span class="scale-number">5</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Pregunta 10 -->
+            <div class="question-card" id="q-card-10">
+              <label class="question-label" for="q10_final_pulse">
+                10. Este es tu espacio libre: ¿Hay alguna mejora urgente, comentario o idea que no hayamos tocado en las preguntas anteriores y que el equipo directivo deba conocer?
+                <span class="required">*</span>
+              </label>
+              <textarea id="q10_final_pulse" name="q10_final_pulse" class="input-textarea" placeholder="Escribe aquí con total libertad..." required></textarea>
+            </div>
+
+            <!-- Opcional: Identificación -->
+            <div class="question-card optional-card">
+              <label class="question-label" for="user_email">
+                📧 Identificación Opcional
+              </label>
+              <p class="question-help">
+                Si prefieres que tu aporte sea anónimo para mayor transparencia, deja este campo vacío. 
+                Si deseas que nos comuniquemos contigo para dar seguimiento individual a tus propuestas, escribe tu correo electrónico o nombre.
+              </p>
+              <input type="text" id="user_identity" class="input-text" placeholder="Nombre o correo electrónico (opcional)">
+            </div>
+          </div>
+
+          <!-- Wizard Footer Navigation -->
+          <div class="wizard-footer">
+            <button type="button" id="btn-prev-step" class="btn btn-secondary" style="display: none;">
+              <span>← Atrás</span>
+            </button>
+            <button type="button" id="btn-next-step" class="btn btn-primary">
+              <span>Siguiente →</span>
+            </button>
+            <button type="submit" id="btn-submit-survey" class="btn btn-success" style="display: none;">
+              <span>🚀 Enviar Respuestas</span>
+            </button>
+          </div>
+
+        </form>
+
+        <!-- Success Screen -->
+        <div id="survey-success" class="wizard-step" style="display: none;">
+          <div class="success-hero">
+            <div class="success-icon-anim">🎉</div>
+            <h2>¡Tu voz ha sido registrada!</h2>
+            <p>Muchas gracias por compartir tus valiosas perspectivas de la jornada nocturna. Tus ideas y alertas son el insumo estratégico para construir un entorno ideal de trabajo.</p>
+            <div class="success-cta">
+              <button id="btn-restart-survey" class="btn btn-secondary">Responder Otra Vez</button>
+              <button id="btn-view-results-success" class="btn btn-primary">Ver Resultados del Equipo</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- RESULTS DASHBOARD SECTION (Initially Hidden) -->
+      <section id="dashboard-section" class="content-card" style="display: none;">
+        <div class="dashboard-header">
+          <div class="title-wrap">
+            <span class="badge">📊 Panel de Inteligencia</span>
+            <h2>Resultados Estratégicos Acumulados</h2>
+            <p>Análisis en tiempo real de la Jornada Nocturna</p>
+          </div>
+          <div class="action-buttons">
+            <button id="btn-simulate-data" class="btn btn-secondary btn-icon" title="Cargar respuestas de prueba para ver el panel completo">
+              <span>🧪 Simular Datos</span>
+            </button>
+            <div class="dropdown-export">
+              <button id="btn-export-menu" class="btn btn-primary btn-icon">
+                <span>📥 Exportar</span>
+              </button>
+              <div class="dropdown-content">
+                <button id="btn-export-csv">Descargar Excel/CSV</button>
+                <button id="btn-export-json">Descargar JSON</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Widgets Grid -->
+        <div class="dashboard-grid">
+          
+          <!-- Key Metrics -->
+          <div class="dashboard-widget metric-widget">
+            <div class="metric-card">
+              <span class="metric-icon">📋</span>
+              <div class="metric-details">
+                <span class="metric-label">Respuestas Totales</span>
+                <span id="stat-total-responses" class="metric-val">0</span>
+              </div>
+            </div>
+            <div class="metric-card">
+              <span class="metric-icon">🛠️</span>
+              <div class="metric-details">
+                <span class="metric-label">Evaluación de Recursos</span>
+                <span id="stat-avg-resources" class="metric-val">0.0 / 5</span>
+              </div>
+            </div>
+            <div class="metric-card">
+              <span class="metric-icon">📣</span>
+              <div class="metric-details">
+                <span class="metric-label">Capacidad de Influencia</span>
+                <span id="stat-avg-influence" class="metric-val">0.0 / 5</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart 1: El Motor del Equipo -->
+          <div class="dashboard-widget chart-widget">
+            <h4>🤝 El Motor del Equipo (Motivación)</h4>
+            <div class="chart-container" id="chart-motivation-container">
+              <!-- Dynamically populated by JS using SVG -->
+              <div class="no-data-placeholder">Completa encuestas o simula datos para ver este gráfico</div>
+            </div>
+          </div>
+
+          <!-- Chart 2: Radar de Inquietudes / Riesgos -->
+          <div class="dashboard-widget chart-widget">
+            <h4>🛡️ Radar de Riesgos e Inquietudes</h4>
+            <div class="chart-container" id="chart-risks-container">
+              <!-- Dynamically populated by JS using SVG -->
+              <div class="no-data-placeholder">Completa encuestas o simula datos para ver este gráfico</div>
+            </div>
+          </div>
+
+          <!-- Open-ended Responses Viewer -->
+          <div class="dashboard-widget full-width responses-widget">
+            <div class="widget-header">
+              <h4>💬 Buzón de Ideas y Respuestas Abiertas</h4>
+              <div class="filter-controls">
+                <select id="select-filter-question" class="input-select">
+                  <option value="q2">Q2: Mayor Fortaleza ("Súperpoderes")</option>
+                  <option value="q3">Q3: Fricciones Diarias y Obstáculos</option>
+                  <option value="q5">Q5: La Varita Mágica (Nuevas ideas)</option>
+                  <option value="q6">Q6: Talentos Ocultos no Aprovechados</option>
+                  <option value="q7">Q7: Visión de Futuro a fin de año</option>
+                  <option value="q10">Q10: Espacio Libre / Mensajes urgentes</option>
+                </select>
+              </div>
+            </div>
+            <div class="responses-list" id="dashboard-open-responses-list">
+              <div class="no-data-placeholder">Completa encuestas o simula datos para explorar el buzón de respuestas</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer-bar">
+      <p>© 2026 La Voz de la Noche • Diseñado con empatía y tecnología de vanguardia</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
